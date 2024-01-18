@@ -9,7 +9,7 @@ export default function Nav() {
     <nav className="main-nav">
       <div className="main-nav-container">
         <div className='main-nav-container-user'>
-          <span>Ben_hg</span>
+          <span className='name-user'>Ben_hg</span>
           <Link to="./user" className="main-nav-item" href="./sign-in.html">
             <i className="fa fa-user-circle"></i>
           </Link>
