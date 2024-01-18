@@ -10,7 +10,7 @@ export default function Header() {
   return (
     <header>
       <Link to="/">
-        <img src={Logo} alt="Argent Bank Logo" />
+        <img className='header-logo' src={Logo} alt="Argent Bank Logo" />
       </Link>
 
       <Nav />
