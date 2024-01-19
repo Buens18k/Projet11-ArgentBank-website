@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../assets/argentBankLogo.png';
-import '../styles/layouts/header.css';
+import '../styles/layouts/_header.scss';
 
 import Nav from './Nav';
 
