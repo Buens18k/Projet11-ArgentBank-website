@@ -14,14 +14,14 @@ body {
   // min-width: 320px;
 }
 
-#root {
-  // display: grid;
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  width: 100%;
-  margin: 0 auto;
-}
+// #root {
+//   // display: grid;
+//   display: flex;
+//   flex-direction: column;
+//   height: auto;
+//   width: 100%;
+//   margin: 0 auto;
+// }
 
 // header {
 //   display: flex;
@@ -32,6 +32,10 @@ body {
 //   width: 100%;
 // }
 
-main {
+.main {
   flex: 1;
+}
+
+.bg-dark {
+  background-color: #12002b;
 }

@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout/Layout';
 import Error404 from './pages/Error404';
 import Home from './pages/Home';
+import SignIn from './pages/Sign-in';
 
 const App = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const App = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
+      },
+      {
+        path: '/sign-in',
+        element: <SignIn />,
       },
     ],
   },
