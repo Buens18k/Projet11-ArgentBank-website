@@ -22,6 +22,10 @@ const App = createBrowserRouter([
         path: '/sign-in',
         element: <SignIn />,
       },
+      {
+        path: '/user',
+        element: <User />,
+      },
     ],
   },
 ]);

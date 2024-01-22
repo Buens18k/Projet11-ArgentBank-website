@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/pages/_home.scss';
 
-import Main from '../components/Main';
 import Hero from '../components/Hero';
 import FeatureItems from '../components/FeatureItem';
 
@@ -11,7 +10,7 @@ import Security from '../assets/icon-security.png';
 
 export default function Home() {
   return (
-    <Main>
+    <main>
       <Hero />
       <section className="features">
         <h2 className="sr-only">Features</h2>
@@ -34,6 +33,6 @@ export default function Home() {
           description="We use top of the line encryption to make sure your data and money is always safe."
         />
       </section>
-    </Main>
+    </main>
   );
 }

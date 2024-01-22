@@ -12,7 +12,7 @@ export default function Error404() {
   return (
     <>
       <Header />
-      <ErrorMessage error={error}/>
+      <ErrorMessage error={error} />
       <Footer />
     </>
   );

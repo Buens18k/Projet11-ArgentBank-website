@@ -1,3 +1,5 @@
+@import '../utils/mixins';
+
 .hero {
   background-image: url('../../assets/bank-tree.jpeg');
   background-position: 0 -50px;
@@ -5,6 +7,16 @@
   background-repeat: no-repeat;
   height: 300px;
   position: relative;
+
+  @include tablet {
+    height: 677px;
+  }
+
+  @include desktop {
+    height: 1000px;
+    max-width: 1440px;
+    margin: 0 auto;
+  }
 
   &-content {
     position: relative;
@@ -27,4 +39,3 @@
     }
   }
 }
-

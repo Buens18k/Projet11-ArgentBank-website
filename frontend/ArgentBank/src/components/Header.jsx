@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Logo from '../assets/argentBankLogo.png';
 import '../styles/layouts/_header.scss';
 
-
 export default function Header() {
   return (
     <header>
