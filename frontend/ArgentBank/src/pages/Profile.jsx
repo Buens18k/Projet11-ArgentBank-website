@@ -2,7 +2,7 @@ import React from 'react';
 
 import Account from '../components/Account';
 
-import '../styles/pages/_user.scss';
+import '../styles/pages/_profile.scss';
 
 export default function Profile() {
   return (

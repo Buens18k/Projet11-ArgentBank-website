@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header>
       <nav className="main-nav">
-        <Link className="main-nav-logo" to="./">
+        <Link className="main-nav-logo" to="/">
           <img className="main-nav-logo-image" src={Logo} alt="Argent Bank Logo" />
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
@@ -33,22 +33,22 @@ export default function Header() {
         {/* Condition pour afficher des liens diffférents en fonction de l'authentification de l'utilisateur */}
         {isAuthenticated ? (
           // Si l'utilisateur est authentifié, affiche des liens vers la page utilisateur et la déconnexion
-          <div>
+          <div className="main-nav-ctaItem">
             <Link className="main-nav-item" to="./profile">
-              {/* <p>{userProfile ? userProfile.userName : 'Load'}</p> */}
+              <p>{userProfile ? userProfile.userName : 'Load'}</p>
               <i className="fa fa-user-circle"></i>
             </Link>
-            <Link className="main-nav-item" to="./sign-in" onClick={handleSignOut}>
+            <Link className="main-nav-item" to="./login" onClick={handleSignOut}>
+              Sign-Out
               <i className="fa fa-sign-out"></i>
-              Sign Out
             </Link>
           </div>
         ) : (
           // Si l'utilisateur n'est pas authentifié, affiche un lien vers la page de connexion
-          <div>
+          <div className="main-nav-ctaItem">
             <Link className="main-nav-item" to="./login">
               <i className="fa fa-user-circle"></i>
-              Sign In
+              Sign-In
             </Link>
           </div>
         )}
