@@ -37,8 +37,9 @@ export default function Form() {
         localStorage.setItem('authToken', token);
         navigate('/user');
       } else {
+        const errorData = await response.json();
         console.error('Erreur :', response.statusText);
-        setErrorMessage('email or password incorrect');
+        setErrorMessage(errorData.message);
       }
     } catch (error) {
       console.error('Erreur :', error);
@@ -52,6 +53,7 @@ export default function Form() {
       <h1>Sign In</h1>
 
       <form onSubmit={handleSubmit}>
+        {errorMessage && <p className="errorMsg">{errorMessage}</p>}
         <div className="input-wrapper">
           <label htmlFor="username">Username</label>
           <input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
