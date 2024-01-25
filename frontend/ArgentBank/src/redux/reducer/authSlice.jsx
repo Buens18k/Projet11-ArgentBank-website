@@ -17,12 +17,12 @@ const authSlice = createSlice({
   initialState, // État initial
   reducers: {
     // Réducteur qui met à jour l'état pour indiquer une connexion réussi
-    setSingIn(state, action) {
+    setSignIn(state, action) {
       state.token = action.payload.token; // Met à jour le token avec la valeur passé dans l'action
       state.isAuthenticated = true; // Indique que l'utilisateur est authentifié
     },
     // Réducteur qui met à jour l'état pour indiquer une déconnexion
-    setSingOut(state) {
+    setSignOut(state) {
       state.token = null; // Réinitialise le token à null
       state.isAuthenticated = false; // Indique que l'utilisateur n'est plus authentifié
       localStorage.removeItem('authToken'); // Supprime le jeton d'authentification du LocalStorage
@@ -30,7 +30,7 @@ const authSlice = createSlice({
   },
 });
 
-// Export les actions générées par le slice (setSingIn, setSingOut)
-export const { setSingIn, setSingOut } = authSlice.actions;
+// Export les actions générées par le slice (setSignIn, setSignOut)
+export const { setSignIn, setSignOut } = authSlice.actions;
 // Export le réducteur généré par le slice
 export default authSlice.reducer;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setSingIn } from '../redux/reducer/authSlice';
+import { setSignIn } from '../redux/reducer/authSlice';
 import '../styles/components/_form.scss';
 
 export default function Form() {
@@ -44,9 +44,9 @@ export default function Form() {
         const token = responseData.body.token;
         localStorage.setItem('authToken', token);
         // Redirection vers la page utilisateur après une connexion réussie
-        navigate('/user');
+        navigate('/profile');
         // Envoie de l'action pour indiquer que l'utilisateur est connecté
-        dispatch(setSingIn({ token }));
+        dispatch(setSignIn({ token }));
       } else {
         // En cas d'erreur, récupération des données d'erreur au format JSON
         const errorData = await response.json();

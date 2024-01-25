@@ -4,9 +4,9 @@ import Account from '../components/Account';
 
 import '../styles/pages/_user.scss';
 
-export default function User() {
+export default function Profile() {
   return (
-    <main className='main bg-dark'>
+    <main className="main bg-dark">
       <div className="header">
         <h1>
           Welcome back

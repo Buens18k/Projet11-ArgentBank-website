@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../assets/argentBankLogo.png';
-import { setSingOut } from '../redux/reducer/authSlice';
+import { setSignOut } from '../redux/reducer/authSlice';
 import '../styles/layouts/_header.scss';
 
 export default function Header() {
@@ -14,9 +14,12 @@ export default function Header() {
   // Utilise le hook useDispatch pour obtenir la fonction de dispatch du store Redux
   const dispatch = useDispatch();
 
+  const userProfile = useSelector((state) => state.user);
+  console.log("Profil de l'utilisateur", userProfile);
+
   // Fonction pour gérer la déconnexion de l'utilisateur
   const handleSignOut = () => {
-    dispatch(setSingOut()); // Dispatch l'action setSingOut pour déconnecter l'utilisateur
+    dispatch(setSignOut()); // Dispatch l'action setSingOut pour déconnecter l'utilisateur
   };
 
   return (
@@ -31,7 +34,8 @@ export default function Header() {
         {isAuthenticated ? (
           // Si l'utilisateur est authentifié, affiche des liens vers la page utilisateur et la déconnexion
           <div>
-            <Link className="main-nav-item" to="./user">
+            <Link className="main-nav-item" to="./profile">
+              {/* <p>{userProfile ? userProfile.userName : 'Load'}</p> */}
               <i className="fa fa-user-circle"></i>
             </Link>
             <Link className="main-nav-item" to="./sign-in" onClick={handleSignOut}>
@@ -42,7 +46,7 @@ export default function Header() {
         ) : (
           // Si l'utilisateur n'est pas authentifié, affiche un lien vers la page de connexion
           <div>
-            <Link className="main-nav-item" to="./sign-in">
+            <Link className="main-nav-item" to="./login">
               <i className="fa fa-user-circle"></i>
               Sign In
             </Link>
