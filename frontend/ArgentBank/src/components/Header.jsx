@@ -15,7 +15,7 @@ export default function Header() {
   const dispatch = useDispatch();
 
   const userProfile = useSelector((state) => state.user);
-  console.log("Profil de l'utilisateur", userProfile);
+  // console.log("Profil de l'utilisateur", userProfile);
 
   // Fonction pour gérer la déconnexion de l'utilisateur
   const handleSignOut = () => {
@@ -38,9 +38,11 @@ export default function Header() {
               <p>{userProfile ? userProfile.userName : 'Load'}</p>
               <i className="fa fa-user-circle"></i>
             </Link>
+            <Link>
+              <i className="fa fa-light fa-gear"></i>
+            </Link>
             <Link className="main-nav-item" to="./login" onClick={handleSignOut}>
-              Sign-Out
-              <i className="fa fa-sign-out"></i>
+              <i className="fa-solid fa-power-off"></i>
             </Link>
           </div>
         ) : (

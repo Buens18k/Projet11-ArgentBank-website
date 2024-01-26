@@ -6,7 +6,7 @@ const profileSlice = createSlice({
   initialState: {
     firstName: '',
     lastName: '',
-    userName: 'user',
+    userName: '',
     email: '',
   },
   reducers: {
