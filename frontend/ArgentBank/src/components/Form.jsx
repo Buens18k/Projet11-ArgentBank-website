@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setSignIn } from '../redux/reducer/authSlice';
 import '../styles/components/_form.scss';
 
 export default function Form() {
+  // Obtention d'une référence à la fonction dispatch de Redux
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // Stockage des valeurs des champs du formulaire
@@ -11,17 +15,18 @@ export default function Form() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  // Fonction qui envoie le formulaire pour login le user
+  // Définition de la fonction de soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Récupérer les valeurs des champs du formulaire
+    // Création d'un objet 'formData avec les valeurs des champs du formulaire
     const formData = {
       email: email,
       password: password,
     };
 
     try {
+      // Envoie d'une requête HTTP POST vers l'API pour la connexion de l'utilisateur
       const response = await fetch('http://localhost:3001/api/v1/user/login', {
         method: 'POST',
         headers: {
@@ -29,19 +34,30 @@ export default function Form() {
         },
         body: JSON.stringify(formData),
       });
+      // Vérification de la réussite de la requête
       if (response.ok) {
+        // Récupération des données de réponse au format JSON
         const responseData = await response.json();
         console.log(responseData);
 
+        // Extraction du jeton d'authentification et sauvegarde dans le LocalStorage
         const token = responseData.body.token;
         localStorage.setItem('authToken', token);
-        navigate('/user');
+        // Redirection vers la page utilisateur après une connexion réussie
+        navigate('/profile');
+        // Envoie de l'action pour indiquer que l'utilisateur est connecté
+        dispatch(setSignIn({ token }));
       } else {
+        // En cas d'erreur, récupération des données d'erreur au format JSON
+        const errorData = await response.json();
         console.error('Erreur :', response.statusText);
-        setErrorMessage('email or password incorrect');
+        // Mise à jour du message d'erreur à afficher dans le formulaire
+        setErrorMessage(errorData.message);
       }
     } catch (error) {
+      // Gestion des erreurs imprévues pendant le processus d'envoi de la requête
       console.error('Erreur :', error);
+      // Mise à jour du message d'erreur à afficher dans le formulaire
       setErrorMessage('an error has occured');
     }
   };
@@ -51,7 +67,9 @@ export default function Form() {
       <i className="fa fa-user-circle sign-in-icon"></i>
       <h1>Sign In</h1>
 
+      {/* Formulaire avec gestion conditionnelle de l'affichage du message d'erreur */}
       <form onSubmit={handleSubmit}>
+        {errorMessage && <p className="errorMsg">{errorMessage}</p>}
         <div className="input-wrapper">
           <label htmlFor="username">Username</label>
           <input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />

@@ -15,8 +15,17 @@
   }
 
   & a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     font-weight: bold;
     color: #2c3e50;
+  }
+
+  &-ctaItem {
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
 
   &-item {
