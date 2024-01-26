@@ -35,14 +35,15 @@ export default function Header() {
           // Si l'utilisateur est authentifié, affiche des liens vers la page utilisateur et la déconnexion
           <div className="main-nav-ctaItem">
             <Link className="main-nav-item" to="./profile">
-              <p>{userProfile ? userProfile.userName : 'Load'}</p>
               <i className="fa fa-user-circle"></i>
+              {userProfile ? userProfile.userName : 'Load'}
             </Link>
             <Link>
               <i className="fa fa-light fa-gear"></i>
             </Link>
             <Link className="main-nav-item" to="./login" onClick={handleSignOut}>
-              <i className="fa-solid fa-power-off"></i>
+              <i class="fa fa-sign-out"></i>
+              Sign Out
             </Link>
           </div>
         ) : (
