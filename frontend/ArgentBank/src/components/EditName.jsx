@@ -4,33 +4,40 @@ import { updateUserName } from '../redux/reducer/profileSlice';
 import '../styles/pages/_profile.scss';
 
 export default function EditName() {
+  // Obtention de la fonction dispatch du Redux pour envoyez des actions
   const dispatch = useDispatch();
-  // Récupère le profile Utilisateur
-  const userProfile = useSelector((state) => state.user);
-  console.log('Le nom dans le store :', userProfile.userName);
 
+  // Récupèration le profile Utilisateur le state Redux
+  const userProfile = useSelector((state) => state.user);
+  // console.log('Le nom dans le store :', userProfile.userName);
+
+  // Récupération du jeton d'authentification depuis le state Redux
   const token = useSelector((state) => state.auth.token);
 
-  // Utilise le hook useState pour définir l'ouverture du formulaire
+  // Utilisation du hook useState pour gérer l'état d'ouverture du formulaire
   const [isEditing, setEditing] = useState(false);
-  const [editedUserName, setEditedUserName] = useState(userProfile.userName);
-  console.log('Le nom editer : ', editedUserName);
 
+  // Utilisation du hook useState pour définir l'état initial de editedUserName avec la valeur actuel du userName récupérer depuis le store
+  const [editedUserName, setEditedUserName] = useState(userProfile.userName);
+  // console.log('Le nom editer : ', editedUserName);
+
+  // Utilisation du hook useEffect pour mettre à jour editedUserName lors d'un changement dans userProfile
   useEffect(() => {
-    setEditedUserName(userProfile.userName); // Mise à jour editedUserName lorsque userProfile.userName change
+    setEditedUserName(userProfile.userName);
   }, [userProfile.userName]);
 
-  // Fonction qui ouvre le formulaire d'édit Name
+  // Fonction qui ouvre le formulaire d'édition du userName
   const handleEditClick = () => {
     setEditing(true);
   };
 
-  // Fonction qui ferme le formulaire et sauvegarde
+  // Fonction qui ferme le formulaire et sauvegarde les modifications
   const handleSaveClick = async (event) => {
     event.preventDefault();
     setEditing(false);
     try {
       const editedUserNameString = String(editedUserName);
+      // Envoie d'une requête PUT au serveur pour mettre à jour le nom userName de l'utilisateur
       const response = await fetch('http://localhost:3001/api/v1/user/profile', {
         method: 'PUT',
         headers: {
@@ -42,12 +49,14 @@ export default function EditName() {
           userName: editedUserNameString,
         }),
       });
+      // Vérification de la réussite de la requête
       if (response.ok) {
         const responseData = await response.json();
-
+        // Dispatch d'une action Redux pour mettre à jour le userName de l'utilisateur dans le state
         dispatch(updateUserName(editedUserName));
         console.log('Le nom d/utilisateur a été mis à jour avec succès :', responseData);
       } else {
+        // Gestion des erreurs en cas d'échex de la requête
         console.error('Error :', response.statusText);
         if (response.status === 400) {
           const errorData = await response.json();
@@ -55,28 +64,33 @@ export default function EditName() {
         }
       }
     } catch (error) {
+      // Gestion des erreurs liées à la requête
       console.error('Error : ', error);
     }
   };
 
-  // Fonction qui ferme le formulaire sans sauvegarder
+  // Fonction qui ferme le formulaire sans sauvegarder les modifications
   const handleCanceClick = () => {
     setEditedUserName(userProfile.userName); // Rétablir la valeur initiale du userName
     setEditing(false);
   };
 
+  // Fonction qui met à jour editedUserName lorsqu'il y a un changement
   const handleUserNameChange = (event) => {
     setEditedUserName(event.target.value);
   };
 
   return (
     <>
+      {/* Si le mode édition est activé  */}
       {isEditing ? (
+        // Formulaire d'edition des informations utilisateur, soumis à handleSaveClick lors de la sauvegarde par le boutton 'Save'
         <form onSubmit={handleSaveClick}>
           <h1>Edit User Info</h1>
           <div>
             <label htmlFor="userName">User Name:</label>
-            <input type="text" id="userName" value={editedUserName} onChange={handleUserNameChange} />
+            {/* Champ d'édition du nom d'utilisateur, avec gestion de changement via la fonction handleUserNameChange, requis pour soumettre le formulaire*/}
+            <input type="text" id="userName" value={editedUserName} onChange={handleUserNameChange} autoComplete="userName" required />
           </div>
           <div>
             <label htmlFor="firstName">First Name:</label>
@@ -86,18 +100,18 @@ export default function EditName() {
             <label htmlFor="lastName">Last Name:</label>
             <input type="text" id="lastName" value={userProfile.lastName} disabled />
           </div>
-          <button className="edit-button" onClick={handleSaveClick}>
+          <button className="edit-button" type="submit">
             Save
           </button>
-          <button className="edit-button" onClick={handleCanceClick}>
+          <button className="edit-button" type="button" onClick={handleCanceClick}>
             Cancel
           </button>
         </form>
       ) : (
+        // Si le mode édition n'est pas activé
         <>
           <h1>
             Welcome back
-            {userProfile.userName}
             <br />
             {userProfile ? `${userProfile.firstName} ${userProfile.lastName} !!` : 'Loading'}
           </h1>
