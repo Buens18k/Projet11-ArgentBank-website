@@ -67,11 +67,6 @@ export default function Profile() {
   return (
     <main className="main bg-dark">
       <div className="header">
-        <h1>
-          Welcome back
-          <br />
-          {userProfile ? `${userProfile.firstName} ${userProfile.lastName} !!` : 'Loading'}
-        </h1>
         <EditName />
       </div>
       <h2 className="sr-only">Accounts</h2>

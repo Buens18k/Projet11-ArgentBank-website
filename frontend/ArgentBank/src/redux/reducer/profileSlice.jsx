@@ -16,8 +16,11 @@ const profileSlice = createSlice({
       state.userName = action.payload.body.userName;
       state.email = action.payload.body.email;
     },
+    updateUserName: (state, action) => {
+      state.userName = action.payload;
+    },
   },
 });
 
-export const { setProfile } = profileSlice.actions;
+export const { setProfile, updateUserName } = profileSlice.actions;
 export default profileSlice.reducer;
