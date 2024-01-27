@@ -56,11 +56,19 @@ export default function EditName() {
         dispatch(updateUserName(editedUserName));
         console.log('Le nom d/utilisateur a été mis à jour avec succès :', responseData);
       } else {
-        // Gestion des erreurs en cas d'échex de la requête
-        console.error('Error :', response.statusText);
-        if (response.status === 400) {
+        // Gestion spécifique pour le code d'erreur 401
+        if (response.status === 401) {
+          const errorData = await response.json();
+          console.error('Error 401 :', errorData.message);
+
+          // Gestion spécifique pour le code d'erreur 400
+        } else if (response.status === 400) {
           const errorData = await response.json();
           console.error('Error 400 :', errorData);
+
+          // Gestion spécifique pour autre erreur (500)
+        } else {
+          console.error('Error :', response.statusText);
         }
       }
     } catch (error) {
