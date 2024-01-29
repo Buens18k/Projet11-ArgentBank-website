@@ -38,9 +38,6 @@ export default function Header() {
               <i className="fa fa-user-circle"></i>
               {userProfile ? userProfile.userName : 'Load'}
             </Link>
-            <Link>
-              <i className="fa fa-light fa-gear"></i>
-            </Link>
             <Link className="main-nav-item" to="./login" onClick={handleSignOut}>
               <i className="fa fa-sign-out"></i>
               Sign Out
