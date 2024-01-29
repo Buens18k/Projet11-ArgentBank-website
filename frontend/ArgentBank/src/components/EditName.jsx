@@ -95,25 +95,29 @@ export default function EditName() {
         // Formulaire d'edition des informations utilisateur, soumis à handleSaveClick lors de la sauvegarde par le boutton 'Save'
         <form onSubmit={handleSaveClick}>
           <h1>Edit User Info</h1>
-          <div>
-            <label htmlFor="userName">User Name:</label>
-            {/* Champ d'édition du nom d'utilisateur, avec gestion de changement via la fonction handleUserNameChange, requis pour soumettre le formulaire*/}
-            <input type="text" id="userName" value={editedUserName} onChange={handleUserNameChange} autoComplete="userName" required />
+          <div className="form">
+            <div className="edit">
+              <label htmlFor="userName">User Name:</label>
+              {/* Champ d'édition du nom d'utilisateur, avec gestion de changement via la fonction handleUserNameChange, requis pour soumettre le formulaire*/}
+              <input type="text" id="userName" value={editedUserName} onChange={handleUserNameChange} autoComplete="userName" required />
+            </div>
+            <div className="edit">
+              <label htmlFor="firstName">First Name:</label>
+              <input type="text" id="firstName" value={userProfile.firstName} disabled />
+            </div>
+            <div className="edit">
+              <label htmlFor="lastName">Last Name:</label>
+              <input type="text" id="lastName" value={userProfile.lastName} disabled />
+            </div>
           </div>
-          <div>
-            <label htmlFor="firstName">First Name:</label>
-            <input type="text" id="firstName" value={userProfile.firstName} disabled />
+          <div className="edit-ctaBtn">
+            <button className="edit-button" type="submit">
+              Save
+            </button>
+            <button className="edit-button" type="button" onClick={handleCanceClick}>
+              Cancel
+            </button>
           </div>
-          <div>
-            <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" value={userProfile.lastName} disabled />
-          </div>
-          <button className="edit-button" type="submit">
-            Save
-          </button>
-          <button className="edit-button" type="button" onClick={handleCanceClick}>
-            Cancel
-          </button>
         </form>
       ) : (
         // Si le mode édition n'est pas activé
