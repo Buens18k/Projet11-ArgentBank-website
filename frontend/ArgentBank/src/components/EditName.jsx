@@ -103,11 +103,11 @@ export default function EditName() {
             </div>
             <div className="edit">
               <label htmlFor="firstName">First Name:</label>
-              <input type="text" id="firstName" value={userProfile.firstName} disabled />
+              <input type="text" id="firstName" value={userProfile.firstName} readOnly />
             </div>
             <div className="edit">
               <label htmlFor="lastName">Last Name:</label>
-              <input type="text" id="lastName" value={userProfile.lastName} disabled />
+              <input type="text" id="lastName" value={userProfile.lastName} readOnly />
             </div>
           </div>
           <div className="edit-ctaBtn">

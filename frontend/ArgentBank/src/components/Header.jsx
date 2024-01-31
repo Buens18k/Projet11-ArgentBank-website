@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 import Logo from '../assets/argentBankLogo.png';
-import { setSignOut } from '../redux/reducer/authSlice';
+import { setSignIn, setSignOut } from '../redux/reducer/authSlice';
 import '../styles/layouts/_header.scss';
 
 export default function Header() {
@@ -21,6 +21,16 @@ export default function Header() {
   const handleSignOut = () => {
     dispatch(setSignOut()); // Dispatch l'action setSingOut pour déconnecter l'utilisateur
   };
+
+  // Utilise le hook useEffect pour vérifier la présence du token au chargement initial
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      // Si un token est présent, utilise dispatch et la fonction setSignin avec le token récupérer pour affirmé une authentification
+      dispatch(setSignIn({ token }));
+    }
+    // Tableau de dépendance vide pour exécuter le useEffect à chaque rendu
+  }, []);
 
   return (
     <header>
