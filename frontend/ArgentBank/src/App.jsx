@@ -1,27 +1,33 @@
-import './App.css'
+import React from 'react';
+import { createBrowserRouter } from 'react-router-dom';
 
-function App() {
+import Layout from './Layout/Layout';
+import Error404 from './pages/Error404';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Profile from './pages/Profile';
 
-  return (
-    <>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="./index.html">
-          <img
-            className="main-nav-logo-image"
-            src="./img/argentBankLogo.png"
-            alt="Argent Bank Logo"
-          />
-          <h1 className="sr-only">Argent Bank</h1>
-        </a>
-        <div>
-          <a className="main-nav-item" href="./sign-in.html">
-            <i className="fa fa-user-circle"></i>
-            Sign In
-          </a>
-        </div>
-      </nav>
-    </>
-  )
-}
+const App = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    errorElement: <Error404 />,
 
-export default App
+    children: [
+      {
+        path: '/',
+        element: <Home />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/profile',
+        element: <Profile />,
+      },
+    ],
+  },
+]);
+
+export default App;
