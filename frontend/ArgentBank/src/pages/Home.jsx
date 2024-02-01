@@ -1,12 +1,12 @@
 import React from 'react';
 import '../styles/pages/_home.scss';
 
-import Hero from '../components/Hero';
 import FeatureItems from '../components/FeatureItem';
+import Hero from '../components/Hero';
 
-import Chat from '../assets/icon-chat.png';
-import Money from '../assets/icon-money.png';
-import Security from '../assets/icon-security.png';
+import Chat from '../assets/icon-chat.webp';
+import Money from '../assets/icon-money.webp';
+import Security from '../assets/icon-security.webp';
 
 export default function Home() {
   return (

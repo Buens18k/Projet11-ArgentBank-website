@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import Logo from '../assets/argentBankLogo.png';
+import Logo from '../assets/argentBankLogo.webp';
 import { setSignIn, setSignOut } from '../redux/reducer/authSlice';
 import '../styles/layouts/_header.scss';
 
