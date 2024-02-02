@@ -7,12 +7,14 @@ const checkToken = () => {
 
 // État initial du slice d'authentification
 const initialState = {
+  // Propriétés
   token: checkToken(), // Initialise le token avec la valeur renvoyé par checkToken()
   isAuthenticated: false, // Initialise isAuthenticated à false par défaut
 };
 
 // Crée un slice d'authentification avec un nom, un état initial et des réducteurs
 const authSlice = createSlice({
+  // Propriétés statique
   name: 'auth', // Nom du slice
   initialState, // État initial
   reducers: {

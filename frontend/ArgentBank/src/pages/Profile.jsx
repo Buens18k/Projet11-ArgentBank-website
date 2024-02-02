@@ -1,18 +1,15 @@
 import React, { useEffect } from 'react';
 
 import Account from '../components/Account';
-
-import { useDispatch, useSelector } from 'react-redux';
 import EditName from '../components/EditName';
+
+import { useDispatch } from 'react-redux';
 import { setProfile } from '../redux/reducer/profileSlice';
 import '../styles/pages/_profile.scss';
 
 export default function Profile() {
   // Utilise le hook useDispatch pour obtenir la fonction de dispatch du store Redux
   const dispatch = useDispatch();
-  // Utilise le hook useSelector pour extraire l'etat de l'utilisateur à partir du store Redux
-  const userProfile = useSelector((state) => state.user);
-  // console.log("Profil de l'utilisateur", userProfile);
 
   // Utilise le hook useEffect pour déclencher une action asynchrone lors du rendu initial du composant
   useEffect(() => {
@@ -56,7 +53,7 @@ export default function Profile() {
         console.log(responseData.body);
       } else {
         // Affiche une erreur en cas de réponse non OK
-        console.error('Error :', response.message);
+        console.error('Error :', response.statusText);
       }
     } catch (error) {
       // Affiche une erreur en cas d'échec de la requête

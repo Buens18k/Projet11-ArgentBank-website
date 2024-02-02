@@ -119,21 +119,85 @@ paths:
           description: Unique account ID
           required: true
           type: string
+        # Ajout d'une option de fonctionnalité Triage des transactions par catégorie
+        - in: query
+          name: sortByCategory
+          description: Sort transactions by category (optional)
+          required: false
+          type: boolean
+        - in: query
+          name: category
+          description: Category to filter transactions (optional)
+          required: false
+          type: string
+        - in: query
+          name: startDate
+          description: Start date for filtering transactions (optional)
+          required: false
+          type: string
+        - in: query
+          name: endDate
+          description: End date for filtering transactions (optional)
+          required: false
+          type: string
       produces:
         - application/json
       responses:
         '200':
           description: Account's transactions fetched successfully for the current month
-          schema:
-            $ref: '#/definitions/UserAccountList'
-          '400':
-            description: Bad request - Invalid fields
-          '401':
-            description: Unauthorized - Authentification failed
-          '404':
-            description: No transaction found for the specified month and account
-          '500':
-            description: Interval Server Error - Something went wrong
+          content:
+            application/json:
+              schema:
+                oneof:
+                  $ref: '#/definitions/UserAccountList'
+                  $ref: '#/defintions/SortByCategoryResponse'
+        '400':
+          description: Bad request - Invalid fields
+          examples:
+            application/json:
+              description: Example of a query with invalid fields
+              value:
+                status: 400
+                message: Invalid fields
+        '401':
+          description: Unauthorized - Authentification failed
+          examples:
+            application/json:
+              description: Example of a query with a missing token
+              value:
+              statue: 401
+              message: Token is missing from header
+        '404':
+          description: No transaction found for the specified month and account
+          examples:
+            application/json:
+              description: Example of query without a transaction
+              value:
+                status: 404
+                message: No transaction found
+        '500':
+          description: Interval Server Error - Something went wrong
+          examples:
+            application/json:
+              description: Example of query with an internal server error
+              value: 500
+              message: Internal Server Error
+
+      examples:
+        application/json:
+          description: Example of query for sort by category
+          value:
+            sortByCategory: true
+            category: category-name
+      
+      x-code-samples:
+        - lang: shell
+          label: cURL
+          source: |
+            curl -X GET "http://localhost:3001/api/v2/accounts/{accountID}/transactions/current?sortByCategory=true&category=category-name" -H "Authorization: Bearer <token>"
+
+            # Request URL
+            # http://localhost:3001/api/v2/accounts/{accountID}/transactions/current?sortByCategory=true&category=category-name
   # Route pour récupérer les détails d'une transaction spécifique et mise à jour des details d'une transaction.
   /accounts/{accountID}/transactions/{transactionID}:
     get:
@@ -310,3 +374,15 @@ definitions:
       note:
         type: string
         description: Transaction note update
+
+  # Ajout du schéma de la nouvelle fonctionnalité
+  SortByCategoryResponse:
+    type: object
+    properties:
+      sortedByTransactions:
+        type: array
+        items:
+          $ref: '#/definitions/Transaction'
+      category:
+        type: string
+        description: Category used for sorting

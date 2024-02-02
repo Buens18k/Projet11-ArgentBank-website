@@ -7,9 +7,8 @@ export default function EditName() {
   // Obtention de la fonction dispatch du Redux pour envoyez des actions
   const dispatch = useDispatch();
 
-  // Récupèration le profile Utilisateur le state Redux
+  // Récupèration des données du Redux store de l'utilisateur
   const userProfile = useSelector((state) => state.user);
-  // console.log('Le nom dans le store :', userProfile.userName);
 
   // Récupération du jeton d'authentification depuis le state Redux
   const token = useSelector((state) => state.auth.token);
@@ -17,7 +16,7 @@ export default function EditName() {
   // Utilisation du hook useState pour gérer l'état d'ouverture du formulaire
   const [isEditing, setEditing] = useState(false);
 
-  // Utilisation du hook useState pour définir l'état initial de editedUserName avec la valeur actuel du userName récupérer depuis le store
+  // Utilisation du hook useState pour définir l'état du nom utilisateur éditer (par défaut le nom utilisateur du redux store enregistrer est utilisé)
   const [editedUserName, setEditedUserName] = useState(userProfile.userName);
   // console.log('Le nom editer : ', editedUserName);
 
@@ -52,7 +51,7 @@ export default function EditName() {
       // Vérification de la réussite de la requête
       if (response.ok) {
         const responseData = await response.json();
-        // Dispatch d'une action Redux pour mettre à jour le userName de l'utilisateur dans le state
+        // Dispatch au store de Redux avec la fonction 'updateUserName' le nom utilisateur éditer
         dispatch(updateUserName(editedUserName));
         console.log('Le nom d/utilisateur a été mis à jour avec succès :', responseData);
       } else {
