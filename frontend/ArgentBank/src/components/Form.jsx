@@ -45,7 +45,7 @@ export default function Form() {
         localStorage.setItem('authToken', token);
         // Redirection vers la page utilisateur après une connexion réussie
         navigate('/profile');
-        // Envoie de l'action pour indiquer que l'utilisateur est connecté
+        // Envoie de l'action pour indiquer au store authSlice que l'utilisateur est connecté
         dispatch(setSignIn({ token }));
       } else {
         // En cas d'erreur, récupération des données d'erreur au format JSON
