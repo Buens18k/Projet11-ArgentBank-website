@@ -33,14 +33,6 @@ export default function Profile() {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${authToken}`,
         },
-        body: JSON.stringify({
-          status: 0,
-          message: 'string',
-          body: {
-            id: 'string',
-            email: 'string',
-          },
-        }),
       });
       // Vérifie si la réponse est ok
       if (response.ok) {
