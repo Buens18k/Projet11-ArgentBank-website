@@ -48,7 +48,7 @@ export default function Header() {
               <i className="fa fa-user-circle"></i>
               {userProfile ? userProfile.userName : 'Load'}
             </Link>
-            <Link className="main-nav-item" to="./login" onClick={handleSignOut}>
+            <Link className="main-nav-item" to="./" onClick={handleSignOut}>
               <i className="fa fa-sign-out"></i>
               Sign Out
             </Link>
