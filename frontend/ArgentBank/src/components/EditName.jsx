@@ -10,7 +10,7 @@ export default function EditName() {
   // Récupèration des données du Redux store de l'utilisateur
   const userProfile = useSelector((state) => state.user);
 
-  // Récupération du jeton d'authentification depuis le state Redux
+  // Récupération du jeton d'authentification depuis le Redux store
   const token = useSelector((state) => state.auth.token);
 
   // Utilisation du hook useState pour gérer l'état d'ouverture du formulaire
