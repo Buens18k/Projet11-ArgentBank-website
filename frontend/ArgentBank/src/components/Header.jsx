@@ -9,24 +9,25 @@ import '../styles/layouts/_header.scss';
 export default function Header() {
   // Utilise le hook useSelector pour extraire la valeur de isAuthenticated depuis le store Redux
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-  // console.log('isAuthentificated', isAuthenticated);
 
   // Utilise le hook useDispatch pour obtenir la fonction de dispatch du store Redux
   const dispatch = useDispatch();
 
+  // Utilise le hook useSelector pour extraire le profil de l'utilisateur depuis le Redux store
   const userProfile = useSelector((state) => state.user);
-  // console.log("Profil de l'utilisateur", userProfile);
 
   // Fonction pour gérer la déconnexion de l'utilisateur
   const handleSignOut = () => {
-    dispatch(setSignOut()); // Dispatch l'action setSingOut pour déconnecter l'utilisateur
+    dispatch(setSignOut()); // Dispatch l'action avec la fonction 'setSingOut' pour déconnecter l'utilisateur
   };
 
   // Utilise le hook useEffect pour vérifier la présence du token au chargement initial
   useEffect(() => {
+    // Récupération du token depuis le LocalStorage
     const token = localStorage.getItem('authToken');
+    // Si un token est présent alors
     if (token) {
-      // Si un token est présent, utilise dispatch et la fonction setSignin avec le token récupérer pour affirmé une authentification
+      // Utilise dispatch et la fonction setSignin avec le token récupérer pour affirmé une authentification
       dispatch(setSignIn({ token }));
     }
     // Tableau de dépendance vide pour exécuter le useEffect à chaque rendu
